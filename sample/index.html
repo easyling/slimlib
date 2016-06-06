@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Slimlib sample</title>
+        <script src="../dist/slimlib.js"></script>
+    </head>
+    <body>
+        <script>
+            (function () {
+                'use strict';
+                // First, it is necessary to define some configuration for SlimView to work
+                // The configuration options are available as properties of SlimView.Config
+                // If you are uncertain what each of these mean or what their value should be
+                // please consult the documentation
+                var config = new SlimView.Config();
+                config.endpoint = 'http://slim.app.easyling.com';
+                config.previewPage = 'http://www.easyling.com';
+                config.targetLanguage = 'de-DE';
+                config.projectCode = 'gereblye';
+                config.token = 'None';
+
+                // Above configuration will be used by SlimView.Channel to:
+                // * establish 2-way communication with SlimView
+                // * provide easy to use wrapper functions for SlimView functionality
+                var slimView = new SlimView.Channel(config);
+                // onError's callback will be invoked if there was an event that
+                // you should be aware - eg. invalid token
+                slimView.onError(function errorHandler(message) {
+                    console.log('Error event', message);
+                });
+                slimView.open();
+            })();
+        </script>
+    </body>
+</html>
