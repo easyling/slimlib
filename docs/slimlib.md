@@ -141,7 +141,8 @@ Channel is responsible for handling
         * [.config](#Channel+config) : <code>[Config](#Config)</code>
         * [.isOpen](#Channel+isOpen) ⇒ <code>boolean</code>
         * [.window](#Channel+window) ⇒ <code>Window</code> &#124; <code>\*</code>
-        * [.open()](#Channel+open)
+        * [.openInNewWindow()](#Channel+openInNewWindow)
+        * [.close()](#Channel+close)
         * [.onError(callback)](#Channel+onError)
         * [.onMessage(callback)](#Channel+onMessage)
         * [.highlight(id)](#Channel+highlight)
@@ -174,10 +175,16 @@ Is SlimView window opened?
 Window reference for the SlimView
 
 **Kind**: instance property of <code>[Channel](#Channel)</code>  
-<a name="Channel+open"></a>
+<a name="Channel+openInNewWindow"></a>
 
-### channel.open()
+### channel.openInNewWindow()
 Opens SlimView with provided configuration
+
+**Kind**: instance method of <code>[Channel](#Channel)</code>  
+<a name="Channel+close"></a>
+
+### channel.close()
+Stops listening on message events and closes the SlimView window
 
 **Kind**: instance method of <code>[Channel](#Channel)</code>  
 <a name="Channel+onError"></a>
@@ -198,9 +205,9 @@ Callback that is invoked when a message arrives from SlimView
 
 **Kind**: instance method of <code>[Channel](#Channel)</code>  
 
-| Param |
-| --- |
-| callback | 
+| Param | Type |
+| --- | --- |
+| callback | <code>[messageCallback](#Channel..messageCallback)</code> | 
 
 <a name="Channel+highlight"></a>
 
@@ -222,7 +229,7 @@ Instruct SlimView to perfoem a search for given content fragment
 
 | Param | Type | Description |
 | --- | --- | --- |
-| fragment | <code>string</code> | Fragment to search |
+| fragment | <code>string</code> | Fragment to search for |
 
 <a name="Channel+translate"></a>
 

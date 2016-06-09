@@ -322,19 +322,24 @@ var SlimView = function (sv) {
 
 
         _createClass(Channel, [{
-            key: 'open',
+            key: 'openInNewWindow',
 
 
             /**
              * Opens SlimView with provided configuration
              */
-            value: function open() {
+            value: function openInNewWindow() {
                 if (!this._errorCallback) {
                     throw 'You need to specify a callback with .onError() before you can open SlimView';
                 }
                 this._messageChannel = new MessageChannel(this.config);
                 this._messageChannel.start(this._errorCallback, this._messageCallback);
             }
+
+            /**
+             * Stops listening on message events and closes the SlimView window
+             */
+
         }, {
             key: 'close',
             value: function close() {
@@ -343,7 +348,7 @@ var SlimView = function (sv) {
 
             /**
              * Register callback function to invoke when an error message arrives from SlimView
-             * @param {Channel~errorCallback} callback
+             * @param {Channel~errorCallback} callback 
              */
 
         }, {
@@ -354,7 +359,7 @@ var SlimView = function (sv) {
 
             /**
              * Callback that is invoked when a message arrives from SlimView
-             * @param callback
+             * @param {Channel~messageCallback} callback
              */
 
         }, {
@@ -378,7 +383,7 @@ var SlimView = function (sv) {
 
             /**
              * Instruct SlimView to perfoem a search for given content fragment
-             * @param {string} fragment Fragment to search
+             * @param {string} fragment Fragment to search for
              */
 
         }, {

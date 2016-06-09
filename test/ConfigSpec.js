@@ -53,7 +53,7 @@ describe('Channel creation', function () {
 
     it('cannot open without onError', function () {
         expect(function () {
-            channel.open();
+            channel.openInNewWindow();
         }).toThrow();
     });
 
@@ -79,7 +79,7 @@ describe('Channel creation', function () {
         var onMessageCb = jasmine.createSpy('message cb')
         channel.onError(onErrorCb);
         channel.onMessage(onMessageCb);
-        channel.open();
+        channel.openInNewWindow();
         expect(window.open).toHaveBeenCalled();
         expect(channel.window).toBe(window);
         expect(channel.isOpen).toBe(true);
@@ -112,7 +112,7 @@ describe('Channel callback routing', function () {
         channel.onError(onErrorCb);
         channel.onMessage(onMessageCb);
         spyOn(window, 'open').and.returnValue(window);
-        channel.open();
+        channel.openInNewWindow();
     });
     it('asd', function () {
         expect(true).toBeTruthy();
@@ -176,7 +176,7 @@ describe('commands', function () {
         channel.onMessage(function () {
         });
         spyOn(window, 'open').and.returnValue(window);
-        channel.open();
+        channel.openInNewWindow();
     });
     afterEach(function () {
         channel.close();

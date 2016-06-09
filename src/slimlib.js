@@ -300,7 +300,7 @@ var SlimView = function (sv) {
         /**
          * Opens SlimView with provided configuration
          */
-        open() {
+        openInNewWindow() {
             if (!this._errorCallback) {
                 throw 'You need to specify a callback with .onError() before you can open SlimView'
             }
@@ -308,13 +308,16 @@ var SlimView = function (sv) {
             this._messageChannel.start(this._errorCallback, this._messageCallback);
         }
 
+        /**
+         * Stops listening on message events and closes the SlimView window
+         */
         close() {
             this._messageChannel.stop();
         }
 
         /**
          * Register callback function to invoke when an error message arrives from SlimView
-         * @param {Channel~errorCallback} callback
+         * @param {Channel~errorCallback} callback 
          */
         onError(callback) {
             this._errorCallback = callback;
@@ -322,7 +325,7 @@ var SlimView = function (sv) {
 
         /**
          * Callback that is invoked when a message arrives from SlimView
-         * @param callback
+         * @param {Channel~messageCallback} callback
          */
         onMessage(callback) {
             this._messageCallback = callback;
@@ -340,7 +343,7 @@ var SlimView = function (sv) {
 
         /**
          * Instruct SlimView to perfoem a search for given content fragment
-         * @param {string} fragment Fragment to search
+         * @param {string} fragment Fragment to search for
          */
         find(fragment) {
             throw "Unimplemented";
