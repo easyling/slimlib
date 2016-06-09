@@ -23,7 +23,7 @@ $> gulp build
 or use CDN:
 
 ```html
-  <script src="https://cdn.rawgit.com/easyling/slimlib/v0.0.1/dist/slimlib.js"></script>
+  <script src="https://cdn.rawgit.com/easyling/slimlib/v0.0.2/dist/slimlib.js"></script>
 ```
 
 **Please note:** RawGit does not guarantee 100% uptime. If that is important to you, you

@@ -72,4 +72,4 @@ module.exports = function(config) {
       captureConsole: true
     }
   })
-}
+};
