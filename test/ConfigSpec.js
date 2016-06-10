@@ -33,7 +33,7 @@ describe('Channel creation', function () {
     var channel;
     beforeAll(function () {
         config = new SlimView.Config();
-        config.endpoint = window.location.origin;
+        config.endpoint = window.location.origin + '/_sd/slim/';
         config.token = 'nukunincs';
         config.previewPage = 'https://www.easyling.com';
         config.targetLanguage = 'hu-HU';
@@ -76,7 +76,7 @@ describe('Channel creation', function () {
             return window;
         });
         var onErrorCb = jasmine.createSpy('error cb');
-        var onMessageCb = jasmine.createSpy('message cb')
+        var onMessageCb = jasmine.createSpy('message cb');
         channel.onError(onErrorCb);
         channel.onMessage(onMessageCb);
         channel.openInNewWindow();

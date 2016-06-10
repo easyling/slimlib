@@ -245,7 +245,8 @@ var SlimView = function (sv) {
                 var config = channel._config;
                 var endpointUri = MessageChannel._parseUrl(config.endpoint);
                 channel._viewId = MessageChannel._getRandomString();
-                var endpointString = endpointUri.origin + '/_sd/slim/' + config.projectCode + '?targetLanguage=' + config.targetLanguage + '&url=' + encodeURIComponent(config.previewPage) + '&viewId=' + channel._viewId;
+                var pathname = endpointUri.pathname.replace(/\/$/, '');
+                var endpointString = endpointUri.origin + pathname + '/' + config.projectCode + '?targetLanguage=' + config.targetLanguage + '&url=' + encodeURIComponent(config.previewPage) + '&viewId=' + channel._viewId;
                 if (!!config.extra && _typeof(config.extra) === 'object') {
                     for (var key in config.extra) {
                         endpointString += '&' + key + '=' + config.extra[key];
