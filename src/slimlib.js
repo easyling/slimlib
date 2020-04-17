@@ -1,4 +1,4 @@
-var SlimView = function (sv) {
+const SlimView = function (sv) {
     'use strict';
 
     /**
@@ -58,7 +58,7 @@ var SlimView = function (sv) {
             this.slimviewRef = null;
             /**
              * SlimView window instance identified by ViewId
-             * @type {string}
+             * @type {?string}
              * @private
              */
             this._viewId = null;
@@ -81,13 +81,14 @@ var SlimView = function (sv) {
          * @param {Channel~messageCallback} onMessage
          */
         start(onError, onMessage) {
+            if(!!this.slimviewRef) throw 'SlimView seems to have already been loaded';
             this._onError = onError;
             this._onMessage = onMessage;
             // open
-            var url = MessageChannel._buildSlimViewUrl(this);
+            let url = MessageChannel._buildSlimViewUrl(this);
             this.slimviewRef = window.open(url, 'Preview', 'height=800px,width=1000px,modal=yes,alwaysRaised=yes');
             // onError
-            var that = this;
+            const that = this;
             this._listenerClosure = (ev) => {
                 that._onMessageArrived.call(that, ev);
             };
@@ -118,7 +119,7 @@ var SlimView = function (sv) {
             switch (message['command']) {
                 case 'slimViewLoaded':
                     // respond with 'vendorReady' + token
-                    var params = {};
+                    let params = {};
                     if (!!this._config.token) {
                         params['accessToken'] = this._config.token;
                     }
@@ -139,7 +140,7 @@ var SlimView = function (sv) {
         }
 
         _postResponse(command, messageMap) {
-            var envelope = {
+            let envelope = {
                 'command': command,
                 'viewId': this._viewId,
                 'response': messageMap
@@ -148,8 +149,8 @@ var SlimView = function (sv) {
         }
 
         postRequest(command, messageMap) {
-            var requestId = MessageChannel._getRandomString();
-            var envelope = {
+            let requestId = MessageChannel._getRandomString();
+            let envelope = {
                 'command': command,
                 'viewId': this._viewId,
                 'messageId': requestId,
@@ -208,16 +209,16 @@ var SlimView = function (sv) {
             // url
             // viewId
             // o = '2'
-            var config = channel._config;
-            var endpointUri = MessageChannel._parseUrl(config.endpoint);
+            const config = channel._config;
+            let endpointUri = MessageChannel._parseUrl(config.endpoint);
             channel._viewId = MessageChannel._getRandomString();
-            var pathname = endpointUri.pathname.replace(/\/$/, '');
-            var endpointString = endpointUri.origin + pathname + '/' + config.projectCode
+            let pathname = endpointUri.pathname.replace(/\/$/, '');
+            let endpointString = endpointUri.origin + pathname + '/' + config.projectCode
                 + '?targetLanguage=' + config.targetLanguage
                 + '&url=' + encodeURIComponent(config.previewPage)
                 + '&viewId=' + channel._viewId;
             if (!!config.extra && typeof config.extra === 'object') {
-                for (var key in config.extra) {
+                for (let key in config.extra) {
                     endpointString += '&' + key + '=' + config.extra[key];
                 }
                 if (!('o' in config.extra)) {
@@ -269,7 +270,7 @@ var SlimView = function (sv) {
             this._errorCallback = null;
             /**
              *
-             * @type {null}
+             * @type {Channel~messageCallback|null}
              * @private
              */
             this._messageCallback = null;
@@ -318,7 +319,7 @@ var SlimView = function (sv) {
 
         /**
          * Register callback function to invoke when an error message arrives from SlimView
-         * @param {Channel~errorCallback} callback 
+         * @param {Channel~errorCallback} callback
          */
         onError(callback) {
             this._errorCallback = callback;
@@ -361,7 +362,7 @@ var SlimView = function (sv) {
                 console.warn("Current SlimView does not support saving - it is operating in a read-only mode");
                 save = false;
             }
-            var update = [{
+            let update = [{
                 'key': id,
                 'target': translation,
                 'propagate': true

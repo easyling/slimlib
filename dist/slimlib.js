@@ -1,6 +1,6 @@
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -54,7 +54,6 @@ var SlimView = function (sv) {
         /**
          * @param {Config} config
          */
-
         function MessageChannel(config) {
             _classCallCheck(this, MessageChannel);
 
@@ -70,7 +69,7 @@ var SlimView = function (sv) {
             this.slimviewRef = null;
             /**
              * SlimView window instance identified by ViewId
-             * @type {string}
+             * @type {?string}
              * @private
              */
             this._viewId = null;
@@ -96,6 +95,7 @@ var SlimView = function (sv) {
         _createClass(MessageChannel, [{
             key: 'start',
             value: function start(onError, onMessage) {
+                if (!!this.slimviewRef) throw 'SlimView seems to have already been loaded';
                 this._onError = onError;
                 this._onMessage = onMessage;
                 // open
@@ -311,7 +311,7 @@ var SlimView = function (sv) {
             this._errorCallback = null;
             /**
              *
-             * @type {null}
+             * @type {Channel~messageCallback|null}
              * @private
              */
             this._messageCallback = null;
@@ -349,7 +349,7 @@ var SlimView = function (sv) {
 
             /**
              * Register callback function to invoke when an error message arrives from SlimView
-             * @param {Channel~errorCallback} callback 
+             * @param {Channel~errorCallback} callback
              */
 
         }, {

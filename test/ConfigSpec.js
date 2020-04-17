@@ -114,9 +114,6 @@ describe('Channel callback routing', function () {
         spyOn(window, 'open').and.returnValue(window);
         channel.openInNewWindow();
     });
-    it('asd', function () {
-        expect(true).toBeTruthy();
-    });
     afterEach(function () {
         onMessageCb.calls.reset();
         onErrorCb.calls.reset();

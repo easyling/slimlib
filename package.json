@@ -1,6 +1,6 @@
 {
   "name": "slimlib",
-  "version": "0.0.2",
+  "version": "0.1.1",
   "description": "SlimView integration High level API",
   "main": "index.js",
   "scripts": {
